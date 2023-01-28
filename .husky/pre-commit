@@ -1,0 +1,90 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npx --no-install lint-staged
+
+#--------------------------------------------------------------------------------
+# Basic Setup
+#--------------------------------------------------------------------------------
+
+# Colors
+RED="\033[1;31m"
+GREEN="\033[1;32m"
+PURPLE="\033[1;35m"
+NC="\033[0m"
+
+# Emojis
+UNICORN="🦄"
+ROCKET="🚀"
+CROSS="❌"
+CHECK="✅"
+PARTY_FACE="🥳"
+WEARY_FACE="😩"
+GRIN_FACE="😀"
+OOPS_FACE="🤭"
+
+
+# Common
+SMALL_MARGIN="\n"
+LARGE_MARGIN="\n\n"
+INDENT="    "
+
+# Assume all hooks will pass
+hook_exit_code=0
+
+#--------------------------------------------------------------------------------
+# Handle Greeting Message
+#--------------------------------------------------------------------------------
+
+echo $LARGE_MARGIN
+echo "${PURPLE} ${UNICORN} Running pre-commit hook... ${NC}"
+echo $SMALL_MARGIN
+
+#--------------------------------------------------------------------------------
+# Check Branch Name
+#--------------------------------------------------------------------------------
+
+local_branch_name="$(git rev-parse --abbrev-ref HEAD)"
+
+# Regex explanation:
+# ^ - Start with, so no chars can come before
+# (ENG-[0-9]+|feat) - 'ENG-#####' OR 'feat'
+# \/ - escape for literal '/'
+# ([a-z][a-z0-9]*)(-[a-z0-9]+)* - repeatable, kebab case, lower case, alphanumeric string
+valid_branch_regex='^(il[0-9]+|feat|release|smartling-.+)\/([a-z][a-z0-9]*)(-[a-z0-9]+)*'
+
+if [[ ! $local_branch_name =~ $valid_branch_regex ]]
+then
+    echo "${RED} ${UNICORN} FAIL: There is something wrong with your branch name ${OOPS_FACE}${NC}"
+
+    echo "${INDENT} Your branch name: ${local_branch_name}"
+    echo "${INDENT} Expected ticket format: il####/descriptive-name"
+
+    echo $SMALL_MARGIN
+
+    hook_exit_code=1
+
+else
+    echo "${GREEN} ${UNICORN} PASS: Branch name matches required format${GRIN_FACE}${NC}"
+    echo $SMALL_MARGIN
+fi
+
+#--------------------------------------------------------------------------------
+# Handle Exit Message
+#--------------------------------------------------------------------------------
+
+echo "${PURPLE} ${UNICORN} ...pre-commit hook ending ${NC}"
+echo $SMALL_MARGIN
+
+if [ $hook_exit_code -ne 0 ]
+then
+    echo "${RED} ${UNICORN} Looks like something went wrong ${WEARY_FACE}${NC}"
+
+    echo $LARGE_MARGIN
+    exit 1
+else
+    echo "${GREEN} ${UNICORN} Everything looks ready for launch! ${ROCKET} ${PARTY_FACE}${NC}"
+
+    echo $LARGE_MARGIN
+    exit 0
+fi
