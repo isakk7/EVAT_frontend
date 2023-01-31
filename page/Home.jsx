@@ -11,6 +11,7 @@ const Home = () => {
                 name="account-heart"
                 size={50}
                 color='green'
+                onPress={() => navigation.navigate('PatientInformation')}
             />
             <Text style={styles.infText}>nombre: Juan</Text>
             <Text style={styles.infText}>edad: 13</Text>
@@ -30,13 +31,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         margin: 'auto',
-        borderWidth: 1,
         width: '70%',
         height: '30%',
         borderRadius: 4,
         marginTop: '30%',
         marginLeft: '15%',
-        padding:1
+        padding:1,
+        elevation: 8,
+        backgroundColor: 'white',
     },
     buttonForm: {
         backgroundColor: 'green',
