@@ -8,9 +8,12 @@ import {
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import React from 'react'
+import { useContext } from 'react'
+import { UserContext } from '../context/useContext'
 
 const Settings = () => {
     const navigation = useNavigation()
+    const {user}=useContext(UserContext)
 
     return (
         <View>
@@ -23,10 +26,10 @@ const Settings = () => {
                     ></Image>
                 </View>
                 <View style={styles.input}>
-                    <Text>Maria Sanchez</Text>
+                    <Text>{user.name}</Text>
                 </View>
                 <View style={styles.input}>
-                    <Text>maria_sanchez@gmail.com</Text>
+                    <Text>{user.email}</Text>
                 </View>
                 <TouchableOpacity
                     style={styles.buttonOut}

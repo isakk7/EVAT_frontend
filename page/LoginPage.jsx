@@ -8,18 +8,14 @@ import {
 } from 'react-native'
 import { useForm, Controller } from 'react-hook-form'
 import React from 'react'
-import { object } from 'prop-types'
 import useAuthService from '../hooks/useAuthService'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-const propTypes = {
-    navigation: object,
-}
 
-const LoginPage = () => {
+const LoginPage = ({navigation}) => {
     const { control, handleSubmit } = useForm()
     const { signIn } = useAuthService()
-    
+
     return (
         <KeyboardAwareScrollView>
             <View style={styles.container}>
@@ -63,7 +59,7 @@ const LoginPage = () => {
                 />
                 <TouchableOpacity
                     style={styles.buttonContainer}
-                    onPress={handleSubmit((data)=> signIn(data.email, data.password))}
+                    onPress={handleSubmit((data)=> { signIn(data.email, data.password, navigation)})} 
                 >
                     <Text style={styles.ButtonText}>Sign in</Text>
                 </TouchableOpacity>
@@ -110,5 +106,4 @@ const styles = StyleSheet.create({
     },
 })
 
-LoginPage.propTypes = propTypes
 export default LoginPage
