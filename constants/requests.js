@@ -39,9 +39,9 @@ const NEW_DOCTOR_NOTIFICATIONS =
   process.env.REACT_APP_URL + "/api/v1/notification/new-doctor-notifications/";
 const CONFIRM_NOTIFICATION =
   process.env.REACT_APP_URL + "/api/v1/notification/confirm-notification/";
-const NOT_SEEN_NOTIFICATION =
+  const NOT_SEEN_NOTIFICATION =
   process.env.REACT_APP_URL + "/api/v1/notification/not-seen-notification/";
-
+  
 const Requests = {
   DAILY_FORM_REQUEST,
   RED_EVAT_REQUEST,

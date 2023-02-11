@@ -1,13 +1,16 @@
 import useAlert from "./useAlert";
 import useFetch from "./useFetch";
+import { UserContext } from "../context/useContext";
+import { useContext } from "react";
 
 const useAuthService = () => {
   const { loginRequest } = useFetch();
   const waitingResponse = useAlert();
+  const {setUserInfo} = useContext(UserContext)
 
   const signIn = waitingResponse(async (email, password, navigation) => {
     const user = await loginRequest({ email, password });
-
+    setUserInfo (user)
     navigation.navigate("Home");
   });
 

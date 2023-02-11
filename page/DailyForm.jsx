@@ -44,7 +44,7 @@ const DailyForm = () => {
 				{
 					text: "Ok",
 					onPress: async () => {
-						await postEvatForm({ ...data, temperature: selectedValue, idPatient: "638a2906ab6e8d284d203e22" });
+						await postEvatForm({ ...data, temperature: selectedValue, idPatient: "63e26eedd1bd2c776c09aa78" });
 					}
 				}
 			]);
