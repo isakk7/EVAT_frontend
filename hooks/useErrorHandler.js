@@ -16,7 +16,6 @@ const useErrorHandler = () => {
       } catch (error) {
         const errMsg =
           error?.response?.data.msg || "Something went wrong, try again later.";
-
         throw new Error(errMsg);
       }
     };
@@ -26,3 +25,5 @@ const useErrorHandler = () => {
 };
 
 export default useErrorHandler;
+
+

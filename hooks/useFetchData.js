@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 
-const useFetchDataById = (fetchFunction, id) => {
+const useFetchData = fetchFunction => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetchFunction(id)
+    fetchFunction()
       .then(result => setData(result))
       .catch(err => console.log(err));
   }, []);
@@ -29,4 +29,4 @@ const useFetchDataById = (fetchFunction, id) => {
   return { data, setData, removeElementById, addData, updateData };
 };
 
-export default useFetchDataById;
+export default useFetchData;
